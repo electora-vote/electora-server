@@ -1,0 +1,2 @@
+nucypher @ git+https://github.com/nucypher/nucypher@1032a2b5560ef8e5afa02097510f13812943e219
+nucypher-core==0.10.0

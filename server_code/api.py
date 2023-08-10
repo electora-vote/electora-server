@@ -1,14 +1,12 @@
 import anvil.server
-from nucypher_core.ferveo import DkgPublicKey, Ciphertext
+from nucypher.characters.lawful import Bob, Ursula
 from nucypher.characters.lawful import Enrico as Enrico
-from nucypher.characters.lawful import Ursula
-from nucypher.characters.lawful import Bob
 from nucypher.cli.utils import connect_to_blockchain
-from nucypher.utilities.emitters import StdoutEmitter
-from electora_keys import DKGkey, uplink_key
 from nucypher.policy.conditions.lingo import ConditionLingo
+from nucypher.utilities.emitters import StdoutEmitter
+from nucypher_core.ferveo import Ciphertext, DkgPublicKey
 
-anvil.server.connect(uplink_key)
+DKGkey = b"\xa1o\xf0\xbb\xefl\xb0\xb1\xbd?E\xf4\xbek\xe6P\xc2\xd2N\xc8\xb0\xbd\x0c\xc1\xd5e\x83R\xdf\\\nY\x06\x04\xe5\x1cX\x99\xdaI\xeb\xb8\xca\xb70\xbfi\xaf"
 goerli_uri = "https://goerli.infura.io/v3/663d60ae0f504f168b362c2bda60f81c"
 
 connect_to_blockchain(eth_provider_uri=goerli_uri, emitter=StdoutEmitter())
@@ -37,15 +35,16 @@ def get_conditions(timestamp):
 
 @anvil.server.callable
 def encrypt_vote(proof, vote, timestamp):
-    message = f'{proof}{vote}'.encode()
+    message = f"{proof}{vote}".encode()
     conditions = get_conditions(timestamp)
     ciphertext = enrico.encrypt_for_dkg(
         plaintext=message,
         conditions=conditions,
     )
     print(conditions)
-  
+
     return bytes(ciphertext).hex()
+
 
 @anvil.server.callable
 def decrypt_vote(ciphertext, timestamp):
@@ -55,6 +54,3 @@ def decrypt_vote(ciphertext, timestamp):
         conditions=get_conditions(timestamp),
     )
     return bytes(cleartext).decode()
-    
-
-anvil.server.wait_forever()
