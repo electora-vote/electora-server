@@ -4,7 +4,7 @@ services:
   client_config: {}
   server_config: {}
 startup: null
-package_name: Electora_Server
+package_name: electora_server
 allow_embedding: false
 name: Electora Server
 runtime_options:
