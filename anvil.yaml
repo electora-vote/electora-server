@@ -1,20 +1,21 @@
 dependencies: []
 services:
-- source: /runtime/services/tables.yml
-  client_config: {}
-  server_config: {}
-startup: null
+  - source: /runtime/services/tables.yml
+    client_config: {}
+    server_config: {}
+    startup: { type: module, module: startup }
 package_name: electora_server
 allow_embedding: false
 name: Electora Server
 runtime_options:
   version: 2
-  client_version: '3'
+  client_version: "3"
   server_version: python3-full
-  server_spec: {base: python310-minimal, pre_install_script: 'export CARGO_HOME=/usr/local
+  server_spec:
+    { base: python310-minimal, pre_install_script: "export CARGO_HOME=/usr/local
 
-      export RUSTUP_HOME=/usr/local
+        export RUSTUP_HOME=/usr/local
 
-      curl --proto ''=https'' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y'}
+        curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y" }
 startup_form: null
 renamed: true
