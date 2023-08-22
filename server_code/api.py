@@ -26,11 +26,10 @@ def get_conditions(timestamp):
         "chain": 5,
         "returnValueTest": {"comparator": ">=", "value": timestamp},
     }
-    conditions = {
+    return {
         "version": ConditionLingo.VERSION,
         "condition": time_condition,
     }
-    return conditions
 
 
 @anvil.server.callable
